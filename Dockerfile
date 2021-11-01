@@ -48,6 +48,7 @@ RUN echo "Setup Akamai CLI" &&\
     printf "yes\nyes\nyes\n" | ./akamai &&\
     echo "[ccu]\nclient_secret = kgsKKUojS38pVoWe7B+ryW+zSwlWsSfBbCPTBCFvoyo=\nhost = akab-bzepu52nott6dfns-4ab2bv7wlb6pbipr.luna.akamaiapis.net\naccess_token = akab-uu2avmhogtcmusse-b6vp5po4wzku42gk\nclient_token = akab-wkbxs7h2bpeciux2-qmgzkzoelczsoojl" > .edgerc &&\
     printf "yes\nyes\n" | ./akamai install --force purge 
+USER root
 ADD content/ /
 RUN chmod u+x /opt/run && \
     mkdir -p /var/log/supervisor && mkdir -p /opt/supervisor && \
