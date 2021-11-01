@@ -18,7 +18,7 @@ ENV SERVER_URL=https://localhost:4443 \
 RUN export DEBIAN_FRONTEND=noninteractive && \
     echo "deb http://ftp.debian.org/debian stretch-backports main" >> /etc/apt/sources.list && \
     apt-get -qq update && \
-    apt-get -qqy install -t stretch-backports --no-install-recommends apt-transport-https curl ca-certificates && \
+    apt-get -qqy install -t stretch-backports --no-install-recommends apt-transport-https wget curl golang-go ca-certificates && \
     curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash -s -- --mariadb-server-version=10.5 && \
     apt-get -qqy install -t stretch-backports --no-install-recommends bash openjdk-8-jre-headless ca-certificates-java supervisor procps sudo openssh-client mariadb-server mariadb-client postgresql-9.6 postgresql-client-9.6 pwgen git uuid-runtime parallel jq && \
     cd /tmp/ && \
@@ -42,7 +42,17 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     cd - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
+RUN cd /var/lib/rundeck &&\
+    wget https://github.com/akamai/cli/releases/download/1.3.0/akamai-1.3.0-linuxamd64 &&\
+    mv akamai-1.3.0-linuxamd64 akamai
+RUN cd /var/lib/rundeck &&\
+    cp akamai /usr/bin/akamai &&\
+    chmod 755 /usr/bin/akamai
+RUN cd /var/lib/rundeck &&\
+    printf "yes\nyes\nyes\n" | akamai &&\
+    echo "[ccu]\nclient_secret = kgsKKUojS38pVoWe7B+ryW+zSwlWsSfBbCPTBCFvoyo=\nhost = akab-bzepu52nott6dfns-4ab2bv7wlb6pbipr.luna.akamaiapis.net\naccess_token = akab-uu2avmhogtcmusse-b6vp5po4wzku42gk\nclient_token = akab-wkbxs7h2bpeciux2-qmgzkzoelczsoojl" > .edgerc &&\
+    ls -la
+RUN printf "yes\nyes\n" | akamai install --force purge 
 ADD content/ /
 RUN chmod u+x /opt/run && \
     mkdir -p /var/log/supervisor && mkdir -p /opt/supervisor && \

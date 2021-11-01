@@ -15,8 +15,9 @@ services:
             MYSQL_ROOT_PASSWORD: "<CHANGE_ME>"
 
     rundeck:
-        image: ${RUNDECK_IMAGE:-jordan/rundeck:latest}
+        #image: ${RUNDECK_IMAGE:-jordan/rundeck:latest}
         container_name: rundeck
+        build: .
         links:
             - mariadb
         depends_on:
