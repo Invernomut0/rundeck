@@ -24,11 +24,10 @@ services:
             - mariadb
         restart: on-failure:5
         volumes:
-            - /bin/akamai=/app/akamai
             - /home/docker/.edgerc=/var/lib/rundeck/.edgerc
             - /home/docker/rundeck/mysql_data=/var/lib/mysql
         environment:
-            EXTERNAL_SERVER_URL: "http://10.109.255.16:4440"
+            EXTERNAL_SERVER_URL: "http://10.109.255.16:4440/rundeck"
             SERVER_URL: ${EXTERNAL_SERVER_URL}
             RDECK_JVM_OPTS: "-Drundeck.jetty.connector.forwarded=true -Dserver.servlet.context-path=/rundeck"
             NO_LOCAL_MYSQL: "true"
