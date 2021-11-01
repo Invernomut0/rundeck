@@ -27,7 +27,7 @@ services:
             - /home/docker/.edgerc=/var/lib/rundeck/.edgerc
             - /home/docker/rundeck/mysql_data=/var/lib/mysql
         environment:
-            EXTERNAL_SERVER_URL: "http://10.109.255.16:4440/rundeck"
+            EXTERNAL_SERVER_URL: "http://127.0.0.1:4440/rundeck"
             SERVER_URL: ${EXTERNAL_SERVER_URL}
             RDECK_JVM_OPTS: "-Drundeck.jetty.connector.forwarded=true -Dserver.servlet.context-path=/rundeck"
             NO_LOCAL_MYSQL: "true"
@@ -36,7 +36,9 @@ services:
             DATABASE_URL: "jdbc:mysql://mariadb/rundeckdb?autoReconnect=true"
             DATABASE_ADMIN_USER: "root"
             DATABASE_ADMIN_PASSWORD: "gnregiragrbgaugfr623213"
-            RUNDECK_PASSWORD: "<RUNDECK_DBPASSWORD_CHANGEME>"
+            RUNDECK_PASSWORD: "admin"
+        ports:
+            - 4440:4440
 
     nginx:
         image: nginx:latest
