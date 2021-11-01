@@ -12,7 +12,7 @@ services:
         container_name: mariadb
         restart: on-failure:5
         environment:
-            MYSQL_ROOT_PASSWORD: "<CHANGE_ME>"
+            MYSQL_ROOT_PASSWORD: "gnregiragrbgaugfr623213"
 
     rundeck:
         #image: ${RUNDECK_IMAGE:-jordan/rundeck:latest}
@@ -23,8 +23,12 @@ services:
         depends_on:
             - mariadb
         restart: on-failure:5
+        volumes:
+            - /bin/akamai=/app/akamai
+            - /home/docker/.edgerc=/var/lib/rundeck/.edgerc
+            - /home/docker/rundeck/mysql_data=/var/lib/mysql
         environment:
-            EXTERNAL_SERVER_URL: "http://<CHANGE_ME>/rundeck"
+            EXTERNAL_SERVER_URL: "http://10.109.255.16:4440"
             SERVER_URL: ${EXTERNAL_SERVER_URL}
             RDECK_JVM_OPTS: "-Drundeck.jetty.connector.forwarded=true -Dserver.servlet.context-path=/rundeck"
             NO_LOCAL_MYSQL: "true"
@@ -32,7 +36,7 @@ services:
             RUNDECK_PROJECT_STORAGE_TYPE: "db"
             DATABASE_URL: "jdbc:mysql://mariadb/rundeckdb?autoReconnect=true"
             DATABASE_ADMIN_USER: "root"
-            DATABASE_ADMIN_PASSWORD: "<CHANGE_ME>"
+            DATABASE_ADMIN_PASSWORD: "gnregiragrbgaugfr623213"
             RUNDECK_PASSWORD: "<RUNDECK_DBPASSWORD_CHANGEME>"
 
     nginx:
