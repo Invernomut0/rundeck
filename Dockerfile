@@ -39,17 +39,14 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     cd - && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-RUN cd /var/lib/rundeck &&\
+RUN echo "Setup Akamai CLI" &&\
+    sudo su - rundeck &&\
     wget https://github.com/akamai/cli/releases/download/1.3.0/akamai-1.3.0-linuxamd64 &&\
-    mv akamai-1.3.0-linuxamd64 akamai
-RUN cd /var/lib/rundeck &&\
-    cp akamai /usr/bin/akamai &&\
-    chmod 755 /usr/bin/akamai
-RUN cd /var/lib/rundeck &&\
+    mv akamai-1.3.0-linuxamd64 akamai &&\
+    chmod 755 akamai &&\
     printf "yes\nyes\nyes\n" | akamai &&\
     echo "[ccu]\nclient_secret = kgsKKUojS38pVoWe7B+ryW+zSwlWsSfBbCPTBCFvoyo=\nhost = akab-bzepu52nott6dfns-4ab2bv7wlb6pbipr.luna.akamaiapis.net\naccess_token = akab-uu2avmhogtcmusse-b6vp5po4wzku42gk\nclient_token = akab-wkbxs7h2bpeciux2-qmgzkzoelczsoojl" > .edgerc &&\
-    ls -la
-RUN printf "yes\nyes\n" | akamai install --force purge 
+    printf "yes\nyes\n" | akamai install --force purge 
 ADD content/ /
 RUN chmod u+x /opt/run && \
     mkdir -p /var/log/supervisor && mkdir -p /opt/supervisor && \
