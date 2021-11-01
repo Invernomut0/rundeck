@@ -26,7 +26,7 @@ services:
             - mariadb
         restart: on-failure:5
         environment:
-            EXTERNAL_SERVER_URL: "http://10.109.255.16:4440/rundeck"
+            EXTERNAL_SERVER_URL: "http://10.109.255.16:4440/"
             SERVER_URL: ${EXTERNAL_SERVER_URL}
             RDECK_JVM_OPTS: "-Drundeck.jetty.connector.forwarded=true -Dserver.servlet.context-path=/rundeck"
             NO_LOCAL_MYSQL: "true"
@@ -35,7 +35,7 @@ services:
             DATABASE_URL: "jdbc:mysql://mariadb/rundeckdb?autoReconnect=true"
             DATABASE_ADMIN_USER: "root"
             DATABASE_ADMIN_PASSWORD: "gnregiragrbgaugfr623213"
-            RUNDECK_PASSWORD: "admin"
+            RUNDECK_PASSWORD: "!Cadorna2021"
         ports:
             - 4440:4440
 
