@@ -14,7 +14,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: "gnregiragrbgaugfr623213"
         volumes:
-            - ./mysql_data=/var/lib/mysql
+            - mysqldata=/var/lib/mysql
 
     rundeck:
         #image: ${RUNDECK_IMAGE:-jordan/rundeck:latest}
@@ -52,3 +52,5 @@ services:
         ports:
             - 80:80
             - 443:443
+volumes:
+  mysqldata:
