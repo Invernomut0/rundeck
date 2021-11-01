@@ -40,7 +40,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 RUN echo "Setup Akamai CLI" &&\
-    sudo su - rundeck &&\
+    su - rundeck &&\
     wget https://github.com/akamai/cli/releases/download/1.3.0/akamai-1.3.0-linuxamd64 &&\
     mv akamai-1.3.0-linuxamd64 akamai &&\
     chmod 755 akamai &&\
