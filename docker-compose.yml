@@ -13,6 +13,8 @@ services:
         restart: on-failure:5
         environment:
             MYSQL_ROOT_PASSWORD: "gnregiragrbgaugfr623213"
+        volumes:
+            - /home/docker/rundeck/mysql_data=/var/lib/mysql
 
     rundeck:
         #image: ${RUNDECK_IMAGE:-jordan/rundeck:latest}
@@ -25,7 +27,6 @@ services:
         restart: on-failure:5
         volumes:
             - /home/docker/.edgerc=/var/lib/rundeck/.edgerc
-            - /home/docker/rundeck/mysql_data=/var/lib/mysql
         environment:
             EXTERNAL_SERVER_URL: "http://10.109.255.16:4440/rundeck"
             SERVER_URL: ${EXTERNAL_SERVER_URL}
