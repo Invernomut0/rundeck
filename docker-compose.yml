@@ -36,6 +36,7 @@ services:
             DATABASE_ADMIN_USER: "root"
             DATABASE_ADMIN_PASSWORD: "gnregiragrbgaugfr623213"
             RUNDECK_PASSWORD: "!Cadorna2021"
+            RUNDECK_ADMIN_PASSWORD: "!Cadorna3"
         ports:
             - 4440:4440
 
